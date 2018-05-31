@@ -28,6 +28,8 @@ class WelkomController {
 		return new ModelAndView(WELKOM, "genres", genresService.findUniekeGenres());
 	}
 
+	//private final static String GENREFILMS = "genrefilms";
+	
 	@GetMapping(params = "id")
 	ModelAndView films(int id) {
 		return new ModelAndView(WELKOM, "genreFilms", filmsService.findByGenre(id));

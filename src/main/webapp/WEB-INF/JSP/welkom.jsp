@@ -15,6 +15,8 @@
 	<c:url value='/' var='url' />
 	<a href='${url}'>Reserveren</a>
 
+
+
 	<h1>Reserveren</h1>
 	<nav>
 		<ul>
@@ -26,10 +28,13 @@
 		</ul>
 	</nav>
 
-	
-	<c:if test='${not empty genrefilms}'>
-	<c:forEach var = 'genrefilm' items = '${genrefilms}'> 
-		<h1>${genrefilm.titel}</h1>
+
+	<c:if test='${empty genreFilms}'>
+		<h1>Pizza niet gevonden</h1>
+	</c:if>
+	<c:if test='${not empty genreFilms}'>
+		<c:forEach var='genreFilm' items='${genreFilms}'>
+			<h1>${genreFilm.titel}</h1>
 		</c:forEach>
 	</c:if>
 </body>
