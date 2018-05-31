@@ -15,7 +15,7 @@ public class Films {
 	
 	
 	
-	Films(int id, int genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
+public Films(int id, int genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
 		this.id = id;
 		this.genreId = genreId;
 		this.titel = titel;
@@ -25,7 +25,7 @@ public class Films {
 	}
 	
 	
-	Films() {
+public Films() {
 	}
 
 

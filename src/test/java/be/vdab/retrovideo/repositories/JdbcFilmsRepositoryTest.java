@@ -2,7 +2,6 @@ package be.vdab.retrovideo.repositories;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -17,32 +16,29 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import be.vdab.retrovideo.entities.Genres;
+import be.vdab.retrovideo.entities.Films;
 
 @RunWith(SpringRunner.class)
 @JdbcTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Import(JdbcGenresRepository.class)
-@Sql("/insertGenre.sql")
+@Import(JdbcFilmsRepository.class)
+@Sql("/insertFilm.sql")
 
-public class JdbcGenresRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class JdbcFilmsRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 
-	private static final String GENRES = "genres";
+	private static final String FILMS = "films";
 
 	@Autowired
-	private JdbcGenresRepository repository;
+	private JdbcFilmsRepository repository;
 
 	@Test
-	public void findUniekeGenresVolgensId() {
-		List<Genres> genres = repository.findUniekeGenres();
-		long aantalGenres = super.jdbcTemplate.queryForObject("select count(distinct id) from genres", Long.class);
-		assertEquals(aantalGenres, genres.size());
-		int vorigeGenre = 0;
-		for (Genres genre : genres) {
-			assertTrue(genre.getId() > vorigeGenre);
-			vorigeGenre = genre.getId();
+	public void test() {
+		List<Films> films = repository.findByGenre(1);
+		String vorigeFilm = "";
+		for (Films film : films) {
+			assertTrue(vorigeFilm.compareTo(film.getTitel()) <= 0);
+			vorigeFilm = film.getTitel();
 		}
-
+		assertEquals(super.countRowsInTableWhere(FILMS, "genreid = 1"), films.size());
 	}
-
 }

@@ -1,9 +1,10 @@
-package be.vdab.retrovideo.repositories;
+package be.vdab.retrovideo.services;
 
 import java.util.List;
 
 import be.vdab.retrovideo.entities.Films;
+import be.vdab.retrovideo.entities.Genres;
 
-public interface FilmsRepository {
+public interface FilmsService {
 	List<Films> findByGenre(int genreId);
 }

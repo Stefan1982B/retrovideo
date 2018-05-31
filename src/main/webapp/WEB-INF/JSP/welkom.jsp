@@ -16,9 +16,21 @@
 	<a href='${url}'>Reserveren</a>
 
 	<h1>Reserveren</h1>
-	<c:forEach var='genre' items='${genres}'>
-		<li>${genre}</li>
-	</c:forEach>
+	<nav>
+		<ul>
+			<c:forEach var='genre' items='${genres}'>
+				<li><c:url value='/' var='url'>
+						<c:param name='id' value='${genre.id}' />
+					</c:url> <a href='${url}'>${genre.naam}</a></li>
+			</c:forEach>
+		</ul>
+	</nav>
 
+	
+	<c:if test='${not empty genrefilms}'>
+	<c:forEach var = 'genrefilm' items = '${genrefilms}'> 
+		<h1>${genrefilm.titel}</h1>
+		</c:forEach>
+	</c:if>
 </body>
 </html>

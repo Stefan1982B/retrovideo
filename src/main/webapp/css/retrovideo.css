@@ -42,3 +42,12 @@ dd {
 dt input {
 	margin-bottom: 0;
 }
+
+nav ul {
+	list-style: none;
+	padding: 0;
+}
+
+nav ul li {
+	display: inline;
+}

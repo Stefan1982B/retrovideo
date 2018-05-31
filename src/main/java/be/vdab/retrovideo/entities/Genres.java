@@ -4,12 +4,12 @@ public class Genres {
 	private int id;
 	private String naam;
 	
-	Genres(int id, String naam) {
+	public Genres(int id, String naam) {
 		this.id = id;
 		this.naam = naam;
 	}
 	
-	Genres() {
+	public Genres() {
 	}
 
 	public int getId() {

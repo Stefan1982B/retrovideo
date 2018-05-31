@@ -6,22 +6,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import be.vdab.retrovideo.entities.Films;
 import be.vdab.retrovideo.entities.Genres;
+import be.vdab.retrovideo.repositories.FilmsRepository;
 import be.vdab.retrovideo.repositories.GenresRepository;
 
 @Service
 @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-class DefaultGenresService implements GenresService {
+class DefaultFilmsService implements FilmsService {
+	
+	
+	private final FilmsRepository filmsRepository;
 
-	private final GenresRepository genresRepository;
-
-	DefaultGenresService(GenresRepository genresRepository) {
-		this.genresRepository = genresRepository;
+	DefaultFilmsService(FilmsRepository filmsRepository) {
+		this.filmsRepository = filmsRepository;
 	}
 
 	@Override
-	public List<Genres> findUniekeGenres() {
-		return genresRepository.findUniekeGenres();
+	public List<Films> findByGenre(int genreId) {
+		return filmsRepository.findByGenre(genreId);
 	}
 
 }
