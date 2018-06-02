@@ -6,7 +6,7 @@
 <!doctype html>
 <html lang='nl'>
 <head>
-<title>retrovideo</title>
+<title>retro video</title>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
 <link rel='icon' href='images/retrovideo.ico' type='image/x-icon'>
 <link rel='stylesheet' href='css/retrovideo.css'>
@@ -14,28 +14,29 @@
 <body>
 	<c:url value='/' var='url' />
 	<a href='${url}'>Reserveren</a>
-
-
-
 	<h1>Reserveren</h1>
 	<nav>
 		<ul>
 			<c:forEach var='genre' items='${genres}'>
-				<li><c:url value='/' var='url'>
-						<c:param name='id' value='${genre.id}' />
-					</c:url> <a href='${url}'>${genre.naam}</a></li>
+				<li><spring:url value='/{genreId}' var='url'>
+						<spring:param name='genreId' value='${genre.id}' />
+					</spring:url> <a href='${url}'>${genre.naam}</a></li>
 			</c:forEach>
 		</ul>
 	</nav>
-
-
-	<c:if test='${empty genreFilms}'>
-		<h1>Pizza niet gevonden</h1>
-	</c:if>
 	<c:if test='${not empty genreFilms}'>
-		<c:forEach var='genreFilm' items='${genreFilms}'>
-			<h1>${genreFilm.titel}</h1>
-		</c:forEach>
+		<ul>
+			<c:forEach var='genreFilm' items='${genreFilms}'>
+				<spring:url value='/film/{id}' var='url'>
+					<spring:param name='id' value='${genreFilm.id}' />
+				</spring:url>
+				<a href='${url}'>
+				<img
+					title='${genreFilm.titel}  ${genreFilm.gereserveerd < genreFilm.voorraad? "reservatie mogelijk" : "reservatie niet mogelijk"}'
+					src="images/${genreFilm.id}.jpg" alt="${genreFilm.titel}">
+					</a>
+			</c:forEach>
+		</ul>
 	</c:if>
 </body>
 </html>

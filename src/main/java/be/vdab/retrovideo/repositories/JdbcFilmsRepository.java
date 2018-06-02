@@ -2,7 +2,9 @@ package be.vdab.retrovideo.repositories;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,7 +20,7 @@ class JdbcFilmsRepository implements FilmsRepository {
 		this.template = template;
 	}
 
-	private final RowMapper<Films> FilmsRowMapper = (resultSet, rowNum) -> new Films(resultSet.getInt("id"),
+	private final RowMapper<Films> filmsRowMapper = (resultSet, rowNum) -> new Films(resultSet.getInt("id"),
 			resultSet.getInt("genreid"), resultSet.getString("titel"), resultSet.getInt("voorraad"),
 			resultSet.getInt("gereserveerd"), resultSet.getBigDecimal("prijs"));
 
@@ -26,7 +28,18 @@ class JdbcFilmsRepository implements FilmsRepository {
 
 	@Override
 	public List<Films> findByGenre(int genreId) {
-		return template.query(SELECT_BY_ID, Collections.singletonMap("genreid", genreId), FilmsRowMapper);
+		return template.query(SELECT_BY_ID, Collections.singletonMap("genreid", genreId), filmsRowMapper);
+	}
+
+	private static final String READ = "select id, genreid, titel, voorraad, gereserveerd, prijs from films where id= :id"; 
+	
+	@Override
+	public Optional<Films> read(int id) {
+		try {
+			return Optional.of(template.queryForObject(READ, Collections.singletonMap("id", id), filmsRowMapper));
+		} catch (IncorrectResultSizeDataAccessException ex) {
+			return Optional.empty();
+		}
 	}
 
 }

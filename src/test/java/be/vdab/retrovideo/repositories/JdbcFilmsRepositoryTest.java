@@ -41,4 +41,13 @@ public class JdbcFilmsRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 		}
 		assertEquals(super.countRowsInTableWhere(FILMS, "genreid = 1"), films.size());
 	}
+
+	private int idVanTestFilm() {
+		return super.jdbcTemplate.queryForObject("select id from films where titel='test'", int.class);
+	}
+
+	@Test
+	public void read() {
+		assertEquals("test", repository.read(idVanTestFilm()).get().getTitel());
+	}
 }
