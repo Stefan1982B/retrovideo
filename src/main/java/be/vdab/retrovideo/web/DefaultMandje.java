@@ -29,7 +29,7 @@ class DefaultMandje implements Serializable, Mandje {
 
 	@Override
 	public void verwijder(int[] ids) {
-		Arrays.stream(ids).forEach(id -> filmIds.remove(id));
+		Arrays.stream(ids).forEach(id -> filmIds.remove(Integer.valueOf(id)));
 		
 	}
 

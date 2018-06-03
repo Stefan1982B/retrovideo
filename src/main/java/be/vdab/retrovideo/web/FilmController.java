@@ -35,8 +35,8 @@ class FilmController {
 	private static final String REDIRECT_NA_TOEVOEGEN = "redirect:/mandje";
 
 	@PostMapping("{id}")
-	String voegFilmToeAanMandje(@PathVariable int id) {
+	ModelAndView voegFilmToeAanMandje(@PathVariable int id) {
 		mandje.addFilmId(id);
-		return REDIRECT_NA_TOEVOEGEN;
+		return new ModelAndView(REDIRECT_NA_TOEVOEGEN);
 	}
 }

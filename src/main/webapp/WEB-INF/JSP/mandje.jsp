@@ -27,17 +27,19 @@
 		<h2>mandje niet gevonden</h2>
 			</c:if>
 	<c:if test='${not empty filmsInMandje}'>
+	<c:url value='/mandje' var='url'/>   
+	<form action='${url}' method='post'> 
 		<table id="tabel">
 		<tr>
 		<th>Film</th>
 		<th>Prijs</th>
-		<th>Verwijderen</th>
+		<th> <input type='submit' value='Verwijderen'> </th>
 		</tr>
 			<c:forEach items='${filmsInMandje}' var='film'>
 			<tr>
 				<td><c:out value='${film.titel}' /></td>
 				<td class="prijs"><c:out value='${film.prijs}' /></td>
-				<td><input type='checkbox' name='verwijderFilm' value='${film.id}'></td>
+				<td><input type='checkbox' name='verwijderid' value='${film.id}'></td>
 				</tr>
 			</c:forEach>
 			<tr>
