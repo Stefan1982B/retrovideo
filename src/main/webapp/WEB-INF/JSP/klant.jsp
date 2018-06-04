@@ -27,10 +27,31 @@
 		<form:label path='deelNaam'>Familienaam bevat: <form:errors
 				path='deelNaam' />
 		</form:label>
-		<form:input path='deelNaam' autofocus='autofocus'
-			required='required' />
+		<form:input path='deelNaam' autofocus='autofocus' required='required' />
 		<input type='submit' value='Zoeken' id='zoekknop'>
 	</form:form>
+	<c:if test='${not empty klanten}'>
+		<table>
+			<tr>
+				<th>Naam</th>
+				<th>Straat - Huisnummer</th>
+				<th>Postcode</th>
+				<th>Gemeente</th>
+			</tr>
+			<c:forEach items='${klanten}' var='klant'>
+				<tr>
+					<td><spring:url value='/klant{klantId}' var='url'>
+							<spring:param name='klantId' value='${klant.id}' />
+						</spring:url> <a href='${url}'><c:out
+								value='${klant.familienaam} ${klant.voornaam}' /> </a></td>
+					<td><c:out value='${klant.straatNummer}' /></td>
+					<td><c:out value='${klant.postcode}' /></td>
+					<td><c:out value='${klant.gemeente}' /></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
+
 </body>
 </html>
 </body>
