@@ -2,8 +2,8 @@ package be.vdab.retrovideo.repositories;
 
 import java.util.List;
 
-import be.vdab.retrovideo.entities.Genres;
+import be.vdab.retrovideo.entities.Genre;
 
 public interface GenresRepository {
-	List<Genres> findUniekeGenres();
+	List<Genre> findUniekeGenres();
 }

@@ -4,18 +4,17 @@ import java.math.BigDecimal;
 
 import org.springframework.format.annotation.NumberFormat;
 
-public class Films {
+public class Film {
 	private int id;
 	private int genreId;
 	private String titel;
 	private int voorraad;
 	private int gereserveerd;
-	@NumberFormat(pattern = "0.00")
+	@NumberFormat(pattern = "€ 0.00")
 	private BigDecimal prijs;
 	
-	
-	
-public Films(int id, int genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
+
+public Film(int id, int genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
 		this.id = id;
 		this.genreId = genreId;
 		this.titel = titel;
@@ -25,7 +24,7 @@ public Films(int id, int genreId, String titel, int voorraad, int gereserveerd, 
 	}
 	
 	
-public Films() {
+public Film() {
 	}
 
 

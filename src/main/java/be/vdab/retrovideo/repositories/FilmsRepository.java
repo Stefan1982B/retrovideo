@@ -3,9 +3,9 @@ package be.vdab.retrovideo.repositories;
 import java.util.List;
 import java.util.Optional;
 
-import be.vdab.retrovideo.entities.Films;
+import be.vdab.retrovideo.entities.Film;
 
 public interface FilmsRepository {
-	List<Films> findByGenre(int genreId);
-	Optional<Films> read(int id);
+	List<Film> findByGenre(int genreId);
+	Optional<Film> read(int id);
 }

@@ -7,54 +7,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>mandje</title>
-<link rel='icon' href='images/retrovideo.ico' type='image/x-icon'>
-<link rel='stylesheet' href='css/retrovideo.css'>
+<link rel='icon' href='<c:url value="/images/retrovideo.ico"/>'
+	type='image/x-icon'>
+<link rel='stylesheet' href='<c:url value="/css/retrovideo.css"/>'>
 </head>
 <body>
 	<nav>
 	<ul>
-		<li><c:url value='/' var='url' /> <a href='${url}'>Reserveren</a>
-		</li>
-		<li><c:url value='/mandje' var='url' /> <a href='${url}'>Mandje</a>
-		</li>
-		<li><c:url value='/klant' var='url' />
-		<a href='${url}'>Klant</a>
-		</li>
-		</ul>
-</nav>
+		<li><a href="<c:url value='/'/>">Reserveren</a></li>
+		<li><a href="<c:url value='/mandje'/>">Mandje</a></li>
+		<li><a href="<c:url value='/klant'/>">Klant</a></li>
+	</ul>
+	</nav>
 	<h1>Mandje</h1>
-		<c:if test='${empty filmsInMandje}'>
+	<c:if test='${empty filmsInMandje}'>
 		<h2>mandje niet gevonden</h2>
-			</c:if>
-	<c:if test='${not empty filmsInMandje}'>
-	<c:url value='/mandje' var='url'/>   
-	<form action='${url}' method='post'> 
-		<table id="tabel">
-		<tr>
-		<th>Film</th>
-		<th>Prijs</th>
-		<th> <input type='submit' value='Verwijderen'> </th>
-		</tr>
-			<c:forEach items='${filmsInMandje}' var='film'>
-			<tr>
-				<td><c:out value='${film.titel}' /></td>
-				<td class="prijs"><c:out value='${film.prijs}' /></td>
-				<td><input type='checkbox' name='verwijderid' value='${film.id}'></td>
-				</tr>
-			</c:forEach>
-			<tr>
-			</tr>
-		</table>
 	</c:if>
-	      <script language="javascript" type="text/javascript">
-            var tds = document.getElementById('tabel').getElementsByTagName('td');
-            var sum = 0;
-            for(var i = 0; i < tds.length; i ++) {
-                if(tds[i].className == 'prijs') {
-                    sum += parseFloat(tds[i].innerHTML);
-                }
-            }
-            document.getElementById('tabel').innerHTML += '<tr><td><h4>totaal</h4></td>' +'<td><h4>' +"€" + sum + '</h4></td></tr>' ;
-        </script>
+	<c:if test='${not empty filmsInMandje}'>
+		<c:url value='/mandje' var='url' />
+		<form action='${url}' method='post'>
+			<table id="tabel">
+				<tr>
+					<th>Film</th>
+					<th>Prijs</th>
+					<th><input type='submit' value='Verwijderen'></th>
+				</tr>
+				<c:forEach items='${filmsInMandje}' var='film'>
+					<tr>
+						<td><c:out value='${film.titel}' /></td>
+						<td class="prijs"><spring:eval expression='film.prijs' /></td>
+						<td><input type='checkbox' name='verwijderid'
+							value='${film.id}'></td>
+					</tr>
+				</c:forEach>
+				<td>Totaal:</td>
+				<td>€ ${totalePrijs }</td>
+				<tr>
+				</tr>
+			</table>
+	</c:if>
 </body>
 </html>

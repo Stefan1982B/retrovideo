@@ -16,7 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import be.vdab.retrovideo.entities.Films;
+import be.vdab.retrovideo.entities.Film;
 
 @RunWith(SpringRunner.class)
 @JdbcTest
@@ -33,9 +33,9 @@ public class JdbcFilmsRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 
 	@Test
 	public void test() {
-		List<Films> films = repository.findByGenre(1);
+		List<Film> films = repository.findByGenre(1);
 		String vorigeFilm = "";
-		for (Films film : films) {
+		for (Film film : films) {
 			assertTrue(vorigeFilm.compareTo(film.getTitel()) <= 0);
 			vorigeFilm = film.getTitel();
 		}

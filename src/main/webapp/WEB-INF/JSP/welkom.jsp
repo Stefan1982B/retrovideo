@@ -15,7 +15,7 @@
 	<c:url value='/' var='url' />
 	<a href='${url}'>Reserveren</a>
 	<h1>Reserveren</h1>
-	<nav>
+	<nav class="menu">
 		<ul>
 			<c:forEach var='genre' items='${genres}'>
 				<li><spring:url value='/{genreId}' var='url'>
@@ -30,13 +30,19 @@
 				<spring:url value='/film/{id}' var='url'>
 					<spring:param name='id' value='${genreFilm.id}' />
 				</spring:url>
-				<a href='${url}'>
-				<img
+				<a href='${url}'> <img
 					title='${genreFilm.titel}  ${genreFilm.gereserveerd < genreFilm.voorraad? "reservatie mogelijk" : "reservatie niet mogelijk"}'
 					src="images/${genreFilm.id}.jpg" alt="${genreFilm.titel}">
-					</a>
+				</a>
 			</c:forEach>
 		</ul>
 	</c:if>
+	<script>
+		for (var i = 0; i < document.links.length; i++) {
+			if (document.links[i].href == document.URL) {
+				document.links[i].className = 'active';
+			}
+		}
+	</script>
 </body>
 </html>

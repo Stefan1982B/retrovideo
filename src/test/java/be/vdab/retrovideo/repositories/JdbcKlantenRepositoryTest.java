@@ -2,7 +2,6 @@ package be.vdab.retrovideo.repositories;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -17,32 +16,32 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import be.vdab.retrovideo.entities.Genre;
+import be.vdab.retrovideo.entities.Klant;
 
 @RunWith(SpringRunner.class)
 @JdbcTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-@Import(JdbcGenresRepository.class)
-@Sql("/insertGenre.sql")
+@Import(JdbcKlantenRepository.class)
+@Sql("/insertKlant.sql")
 
-public class JdbcGenresRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
-
-	private static final String GENRES = "genres";
+public class JdbcKlantenRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 
 	@Autowired
-	private JdbcGenresRepository repository;
+	private JdbcKlantenRepository repository;
+	
 
 	@Test
-	public void findUniekeGenresVolgensId() {
-		List<Genre> genres = repository.findUniekeGenres();
-		long aantalGenres = super.jdbcTemplate.queryForObject("select count(distinct id) from genres", Long.class);
-		assertEquals(aantalGenres, genres.size());
-		int vorigeGenre = 0;
-		for (Genre genre : genres) {
-			assertTrue(genre.getId() > vorigeGenre);
-			vorigeGenre = genre.getId();
+	public void findByFamilienaamBevat() {
+		List<Klant> klanten = repository.findByFamilienaamBevat("te");
+		String vorigeNaam = "";
+		for (Klant klant : klanten) {
+			assertTrue(klant.getFamilienaam().toLowerCase().contains("te"));
+			assertTrue(vorigeNaam.compareTo(klant.getFamilienaam()) <= 0);
+			vorigeNaam = klant.getFamilienaam();
 		}
-
+		long aantalKlanten = super.jdbcTemplate.queryForObject("select count(*) from klanten where familienaam like '%te%'",
+				Long.class);
+		assertEquals(aantalKlanten, klanten.size());
 	}
 
 }

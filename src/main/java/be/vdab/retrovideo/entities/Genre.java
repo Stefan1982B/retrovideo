@@ -1,15 +1,15 @@
 package be.vdab.retrovideo.entities;
 
-public class Genres {
+public class Genre {
 	private int id;
 	private String naam;
 	
-	public Genres(int id, String naam) {
+	public Genre(int id, String naam) {
 		this.id = id;
 		this.naam = naam;
 	}
 	
-	public Genres() {
+	public Genre() {
 	}
 
 	public int getId() {

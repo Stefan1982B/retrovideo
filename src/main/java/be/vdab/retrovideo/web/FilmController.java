@@ -24,9 +24,9 @@ class FilmController {
 	private final static String FILM_VIEW = "film";
 
 	@GetMapping("{id}")
-	ModelAndView showFilm(@PathVariable int id) {
+	ModelAndView toonFilm(@PathVariable int id) {
 		ModelAndView modelAndView = new ModelAndView(FILM_VIEW);
-		filmsService.read(id).ifPresent(films -> modelAndView.addObject(films));
+		filmsService.read(id).ifPresent(film -> modelAndView.addObject(film));
 		modelAndView.addObject(new MandjeForm());
 		return modelAndView;
 	}

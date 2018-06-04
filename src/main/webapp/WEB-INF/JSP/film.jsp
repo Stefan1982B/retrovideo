@@ -5,31 +5,34 @@
 <!doctype html>
 <html lang='nl'>
 <head>
-
+<title>film</title>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<link rel='icon' href='<c:url value="/images/retrovideo.ico"/>' type='image/x-icon'>
+<link rel='stylesheet' href='<c:url value="/css/retrovideo.css"/>'>
 </head>
 <body>
 	<c:url value='/' var='url' />
 	<a href='${url}'>Reserveren</a>
 
-	<c:if test='${empty films}'>
+	<c:if test='${empty film}'>
 		<h1>film niet gevonden</h1>
 	</c:if>
-	<c:if test='${not empty films}'>
-		<h1>${films.titel}</h1>
-		<img src=<c:url value ="/images/${films.id}.jpg"/> alt="${films.titel}">
+	<c:if test='${not empty film}'>
+		<h1>${film.titel}</h1>
+		<img src=<c:url value ="/images/${film.id}.jpg"/> alt="${film.titel}">
 		<dl>
 			<dt>Prijs</dt>
-			<dd>${films.prijs}</dd>
+			<dd><spring:eval expression='film.prijs'/></dd>
 			<dt>Voorraad</dt>
-			<dd>${films.voorraad}</dd>
+			<dd>${film.voorraad}</dd>
 			<dt>Gereserveerd</dt>
-			<dd>${films.gereserveerd}</dd>
+			<dd>${film.gereserveerd}</dd>
 			<dt>Beschikbaar</dt>
-			<dd>${films.gereserveerd < films.voorraad ? 'ja' : 'nee'}</dd>
+			<dd>${film.gereserveerd < film.voorraad ? 'ja' : 'nee'}</dd>
 		</dl>
-		<c:if test='${films.gereserveerd < films.voorraad}'>
+		<c:if test='${film.gereserveerd < film.voorraad}'>
 			<spring:url value='/film/{id}' var='url'>
-			   <spring:param name='id' value="${films.id}"/>  
+			   <spring:param name='id' value="${film.id}"/>  
 			    </spring:url> 
 			<form:form action='${url}' modelAttribute='mandjeForm' method='post'>
 				<input type='submit' value='Mandje'>

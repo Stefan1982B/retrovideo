@@ -63,6 +63,11 @@ nav li a:hover {
 	text-decoration: none;
 }
 
+nav li a.active { 
+    color: black;
+	text-decoration: none;
+}
+
 table, th, td{
 	border: 1px solid black;
 	width:50%;

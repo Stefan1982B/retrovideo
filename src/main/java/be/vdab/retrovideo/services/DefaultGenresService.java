@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.vdab.retrovideo.entities.Genres;
+import be.vdab.retrovideo.entities.Genre;
 import be.vdab.retrovideo.repositories.GenresRepository;
 
 @Service
@@ -20,7 +20,7 @@ class DefaultGenresService implements GenresService {
 	}
 
 	@Override
-	public List<Genres> findUniekeGenres() {
+	public List<Genre> findUniekeGenres() {
 		return genresRepository.findUniekeGenres();
 	}
 

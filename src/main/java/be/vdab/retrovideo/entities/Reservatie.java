@@ -2,15 +2,15 @@ package be.vdab.retrovideo.entities;
 
 import java.time.LocalDateTime;
 
-public class reservaties {
+public class Reservatie {
 	private int klantId;
 	private int filmId;
 	private LocalDateTime reservatie = LocalDateTime.now();
 	
-	reservaties() {
+	Reservatie() {
 	}
 
-	reservaties(int klantId, int filmId, LocalDateTime reservatie) {
+	Reservatie(int klantId, int filmId, LocalDateTime reservatie) {
 		this.klantId = klantId;
 		this.filmId = filmId;
 		this.reservatie = reservatie;

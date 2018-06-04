@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.vdab.retrovideo.entities.Films;
-import be.vdab.retrovideo.entities.Genres;
+import be.vdab.retrovideo.entities.Film;
+import be.vdab.retrovideo.entities.Genre;
 import be.vdab.retrovideo.repositories.FilmsRepository;
 import be.vdab.retrovideo.repositories.GenresRepository;
 
@@ -24,12 +24,12 @@ class DefaultFilmsService implements FilmsService {
 	}
 
 	@Override
-	public List<Films> findByGenre(int genreId) {
+	public List<Film> findByGenre(int genreId) {
 		return filmsRepository.findByGenre(genreId);
 	}
 
 	@Override
-	public Optional<Films> read(int id) {
+	public Optional<Film> read(int id) {
 		return filmsRepository.read(id);
 	}
 

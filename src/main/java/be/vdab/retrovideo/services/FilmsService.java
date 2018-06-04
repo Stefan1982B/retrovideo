@@ -3,10 +3,10 @@ package be.vdab.retrovideo.services;
 import java.util.List;
 import java.util.Optional;
 
-import be.vdab.retrovideo.entities.Films;
-import be.vdab.retrovideo.entities.Genres;
+import be.vdab.retrovideo.entities.Film;
+import be.vdab.retrovideo.entities.Genre;
 
 public interface FilmsService {
-	List<Films> findByGenre(int genreId);
-	Optional<Films> read(int id); 
+	List<Film> findByGenre(int genreId);
+	Optional<Film> read(int id); 
 }

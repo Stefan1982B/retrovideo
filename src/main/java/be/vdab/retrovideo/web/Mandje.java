@@ -1,11 +1,12 @@
 package be.vdab.retrovideo.web;
 
+import java.math.BigDecimal;
 import java.util.List;
-
-import be.vdab.retrovideo.entities.Films;
+import java.util.Optional;
 
 interface Mandje {
   void addFilmId(int filmid);  
-  public List<Integer> getFilmIds(); 
+  List<Integer> getFilmIds(); 
   void verwijder(int[] ids);
+  BigDecimal berekenTotalePrijs(List<BigDecimal> filmPrijzen);
 }

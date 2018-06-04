@@ -1,9 +1,11 @@
 package be.vdab.retrovideo.web;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -33,5 +35,10 @@ class DefaultMandje implements Serializable, Mandje {
 		
 	}
 
+	@Override
+	public BigDecimal berekenTotalePrijs(List<BigDecimal> filmPrijzen) {
+		return filmPrijzen.stream()
+		.reduce((vorigeSom, getal) ->vorigeSom.add(getal)).orElse(BigDecimal.ZERO);
+	}
 	
 }

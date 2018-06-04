@@ -1,6 +1,8 @@
 package be.vdab.retrovideo.entities;
 
-public class Klanten {
+import org.springframework.stereotype.Component;
+
+public class Klant {
 private int id;
 private String familienaam;
 private String voornaam;
@@ -8,10 +10,10 @@ private String straatNummer;
 private String postcode;
 private String gemeente;
 
-Klanten() {
+public Klant() {
 }
 
-Klanten(int id, String familienaam, String voornaam, String straatNummer, String postcode, String gemeente) {
+public Klant(int id, String familienaam, String voornaam, String straatNummer, String postcode, String gemeente) {
 	this.id = id;
 	this.familienaam = familienaam;
 	this.voornaam = voornaam;
