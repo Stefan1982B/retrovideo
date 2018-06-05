@@ -18,7 +18,7 @@
 	</ul>
 	</nav>
 	<h1>Rapport</h1>
-	<p>Reservatie is OK</p>
+	<p>De Reservatie is OK</p>
 
 <body>
 

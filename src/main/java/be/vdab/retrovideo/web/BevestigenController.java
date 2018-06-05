@@ -36,9 +36,7 @@ class BevestigenController {
 		return modelAndView;
 	}
 	
-	
-	
-	
+
 	private final static String BEVESTIGD_VIEW = "bevestigd";
 	
 	@GetMapping("{klantId}/bevestigd")
@@ -51,8 +49,11 @@ class BevestigenController {
 	private static final String REDIRECT_URL_BIJ_MISLUKTE_RESERVATIE =   "reservatiemislukt"; 
 	@PostMapping("{klantId}/bevestigd")
 	ModelAndView bevestigd(@PathVariable int klantId) {
-		Reservatie reservatie = new Reservatie(1,2,LocalDateTime.now());
-		reservatiesService.create(reservatie);
+		for(int filmId : mandje.getFilmIds()) {
+			Reservatie reservatie = new Reservatie(klantId, filmId, LocalDateTime.now());
+			reservatiesService.create(reservatie);
+		}
+
 	return new ModelAndView(REDIRECT_URL_NA_BEVESTIGING);
 	}
 }
