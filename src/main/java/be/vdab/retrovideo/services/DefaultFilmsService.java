@@ -33,4 +33,11 @@ class DefaultFilmsService implements FilmsService {
 		return filmsRepository.read(id);
 	}
 
+	@Override
+	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+	public void update(Film film) {
+		filmsRepository.update(film);
+		
+	}
+
 }

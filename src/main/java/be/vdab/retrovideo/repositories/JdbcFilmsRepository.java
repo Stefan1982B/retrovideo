@@ -35,8 +35,8 @@ class JdbcFilmsRepository implements FilmsRepository {
 		return template.query(SELECT_BY_ID, Collections.singletonMap("genreid", genreId), filmsRowMapper);
 	}
 
-	private static final String READ = "select id, genreid, titel, voorraad, gereserveerd, prijs from films where id= :id"; 
-	
+	private static final String READ = "select id, genreid, titel, voorraad, gereserveerd, prijs from films where id= :id";
+
 	@Override
 	public Optional<Film> read(int id) {
 		try {
@@ -45,17 +45,16 @@ class JdbcFilmsRepository implements FilmsRepository {
 			return Optional.empty();
 		}
 	}
-	
-	private static final String UPDATE_FILM = "update film set gereserveerd = :gereserveerd";
-	
+
+	private static final String UPDATE_FILM = "update films set gereserveerd = :gereserveerd where id = :id and gereserveerd < voorraad";
+
 	@Override
 	public void update(Film film) {
-		  Map<String, Object> parameters = new HashMap<>();
-		  parameters.put("gereserveerd", film.getGereserveerd()+1);  
-		  if (template.update(UPDATE_FILM, parameters) == 0) {  
-			  throw new FilmNietGevondenException();  
-			  } 
-		  } 	
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("gereserveerd", film.getGereserveerd() + 1);
+		parameters.put("id", film.getId());
+		if (template.update(UPDATE_FILM, parameters) == 0) {
+			throw new FilmNietGevondenException();
+		}
 	}
-
-
+}

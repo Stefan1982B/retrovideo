@@ -18,9 +18,18 @@
 	</ul>
 	</nav>
 	<h1>Rapport</h1>
+	  <c:if test='${empty filmTitels}'>      
 	<p>De Reservatie is OK</p>
-
-<body>
+	</c:if>
+  <c:if test='${not empty filmTitels}'>
+  <p>De Reservatie is niet OK, volgende titels zijn niet op voorraad:</p>
+	<ul>
+		<c:forEach items='${filmTitels}' var='filmTitel'>
+			<li><c:out value='${filmTitel}' /></li>
+		</c:forEach>
+	</ul>
+	</c:if>
 
 </body>
+
 </html>

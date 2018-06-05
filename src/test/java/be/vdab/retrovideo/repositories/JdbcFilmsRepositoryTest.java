@@ -3,6 +3,7 @@ package be.vdab.retrovideo.repositories;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Test;
@@ -50,4 +51,13 @@ public class JdbcFilmsRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 	public void read() {
 		assertEquals("test", repository.read(idVanTestFilm()).get().getTitel());
 	}
+
+	
+	@Test   public void update() {   
+		int id = idVanTestFilm();  
+		Film film = new Film(id, 1, "test", 10, 6, BigDecimal.TEN);
+		repository.update(film);     
+		assertEquals(7, repository.read(idVanTestFilm()).get().getGereserveerd());
+	}
+	
 }
