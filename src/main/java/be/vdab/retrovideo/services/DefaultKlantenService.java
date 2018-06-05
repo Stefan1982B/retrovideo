@@ -1,6 +1,7 @@
 package be.vdab.retrovideo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -22,6 +23,11 @@ class DefaultKlantenService implements KlantenService{
 	@Override
 	public List<Klant> findByFamilienaamBevat(String deelNaam) {
 		return repository.findByFamilienaamBevat(deelNaam);
+	}
+
+	@Override
+	public Klant read(int id) {
+		return repository.read(id);
 	}
 	
 

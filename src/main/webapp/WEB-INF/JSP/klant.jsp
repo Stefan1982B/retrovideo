@@ -40,8 +40,8 @@
 			</tr>
 			<c:forEach items='${klanten}' var='klant'>
 				<tr>
-					<td><spring:url value='/klant{klantId}' var='url'>
-							<spring:param name='klantId' value='${klant.id}' />
+					<td><spring:url value='/klant/{id}' var='url'>
+							<spring:param name='id' value='${klant.id}' />
 						</spring:url> <a href='${url}'><c:out
 								value='${klant.familienaam} ${klant.voornaam}' /> </a></td>
 					<td><c:out value='${klant.straatNummer}' /></td>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>bevestigen</title>
+<title>bevestigd</title>
 <link rel='icon' href='<c:url value="/images/retrovideo.ico"/>'
 	type='image/x-icon'>
 <link rel='stylesheet' href='<c:url value="/css/retrovideo.css"/>'>
@@ -15,19 +15,11 @@
 	<nav>
 	<ul>
 		<li><a href="<c:url value='/'/>">Reserveren</a></li>
-		<li><a href="<c:url value='/mandje'/>">Mandje</a></li>
-		<li><a href="<c:url value='/klant'/>">Klanten</a></li>
 	</ul>
 	</nav>
-	<h1>bevestigen</h1>
-	<p>${mandje.size()} film(s) voor ${klant.voornaam} ${klant.familienaam}</p>
-	
-				<spring:url value='/klant/{id}/bevestigd' var='url'>
-			   <spring:param name='id' value="${klant.id}"/>  
-			    </spring:url> 
-			<form:form action='${url}' method='post'>
-				<input type='submit' value='Bevestigen'>
-			</form:form>
+	<h1>Rapport</h1>
+	<p>Reservatie is OK</p>
+
 <body>
 
 </body>

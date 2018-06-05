@@ -28,7 +28,6 @@ public class JdbcKlantenRepositoryTest extends AbstractTransactionalJUnit4Spring
 
 	@Autowired
 	private JdbcKlantenRepository repository;
-	
 
 	@Test
 	public void findByFamilienaamBevat() {
@@ -39,9 +38,18 @@ public class JdbcKlantenRepositoryTest extends AbstractTransactionalJUnit4Spring
 			assertTrue(vorigeNaam.compareTo(klant.getFamilienaam()) <= 0);
 			vorigeNaam = klant.getFamilienaam();
 		}
-		long aantalKlanten = super.jdbcTemplate.queryForObject("select count(*) from klanten where familienaam like '%te%'",
-				Long.class);
+		long aantalKlanten = super.jdbcTemplate
+				.queryForObject("select count(*) from klanten where familienaam like '%te%'", Long.class);
 		assertEquals(aantalKlanten, klanten.size());
 	}
 
+	private int idVanTestKlant() {
+		return super.jdbcTemplate.queryForObject("select id from klanten where familienaam='testfamilienaam'",
+				Integer.class);
+	}
+
+	@Test
+	public void read() {
+		assertEquals("testvoornaam", repository.read(idVanTestKlant()).get().getVoornaam());
+	}
 }
