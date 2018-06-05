@@ -8,4 +8,5 @@ import be.vdab.retrovideo.entities.Film;
 public interface FilmsRepository {
 	List<Film> findByGenre(int genreId);
 	Optional<Film> read(int id);
+	void update(Film film); 
 }

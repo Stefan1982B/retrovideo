@@ -1,7 +1,10 @@
 package be.vdab.retrovideo.repositories;
 
+import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -10,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import be.vdab.retrovideo.entities.Film;
+import be.vdab.retrovideo.exceptions.FilmNietGevondenException;
 
 @Repository
 class JdbcFilmsRepository implements FilmsRepository {
@@ -41,5 +45,17 @@ class JdbcFilmsRepository implements FilmsRepository {
 			return Optional.empty();
 		}
 	}
+	
+	private static final String UPDATE_FILM = "update film set gereserveerd = :gereserveerd";
+	
+	@Override
+	public void update(Film film) {
+		  Map<String, Object> parameters = new HashMap<>();
+		  parameters.put("gereserveerd", film.getGereserveerd()+1);  
+		  if (template.update(UPDATE_FILM, parameters) == 0) {  
+			  throw new FilmNietGevondenException();  
+			  } 
+		  } 	
+	}
 
-}
+

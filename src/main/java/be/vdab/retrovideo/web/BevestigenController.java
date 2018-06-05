@@ -46,7 +46,6 @@ class BevestigenController {
 	}
 	
 	private final static String REDIRECT_URL_NA_BEVESTIGING = "redirect:/klant/{klantId}/bevestigd";
-	private static final String REDIRECT_URL_BIJ_MISLUKTE_RESERVATIE =   "reservatiemislukt"; 
 	@PostMapping("{klantId}/bevestigd")
 	ModelAndView bevestigd(@PathVariable int klantId) {
 		for(int filmId : mandje.getFilmIds()) {
