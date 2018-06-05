@@ -20,14 +20,16 @@
 	</ul>
 	</nav>
 	<h1>bevestigen</h1>
-	<p>${mandje.size()} film(s) voor ${klant.voornaam} ${klant.familienaam}</p>
+	<p>${mandje.size()}film(s) voor ${klant.voornaam}
+		${klant.familienaam}</p>
+
+	<spring:url value='/klant/{klantId}/bevestigd' var='url'>
+	  <spring:param name='klantId' value='${klant.id}'/> 
+	   </spring:url>
 	
-				<spring:url value='/klant/{id}/bevestigd' var='url'>
-			   <spring:param name='id' value="${klant.id}"/>  
-			    </spring:url> 
-			<form:form action='${url}' method='post'>
-				<input type='submit' value='Bevestigen'>
-			</form:form>
+	<form:form action='${url}' modelAttribute='reservatie' method='post'>
+		<input type='submit' value='Bevestigen'>
+	</form:form>
 <body>
 
 </body>

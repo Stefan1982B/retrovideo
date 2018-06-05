@@ -10,7 +10,7 @@ public class Reservatie {
 	Reservatie() {
 	}
 
-	Reservatie(int klantId, int filmId, LocalDateTime reservatie) {
+	public Reservatie(int klantId, int filmId, LocalDateTime reservatie) {
 		this.klantId = klantId;
 		this.filmId = filmId;
 		this.reservatie = reservatie;
