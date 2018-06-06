@@ -3,6 +3,7 @@ package be.vdab.retrovideo.web;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ class MandjeController {
 		this.filmsService = filmsService;
 	}
 
-	private List<Film> maakFilmsVanFilmsIds(List<Integer> filmIds) {
+	private List<Film> maakFilmsVanFilmsIds(Set<Integer> filmIds) {
 		List<Film> films = new ArrayList<>(filmIds.size());
 		for (int id : filmIds) {
 			filmsService.read(id).ifPresent(film -> films.add(film));
@@ -33,7 +34,7 @@ class MandjeController {
 		return films;
 	}
 	
-	private List<BigDecimal> maakPrijzenVanFilmsIds(List<Integer> filmIds) {
+	private List<BigDecimal> maakPrijzenVanFilmsIds(Set<Integer> filmIds) {
 		List<BigDecimal> prijzen = new ArrayList<>(filmIds.size());
 		for (int id : filmIds) {
 			filmsService.read(id).ifPresent(film -> prijzen.add(film.getPrijs()));
@@ -60,6 +61,11 @@ class MandjeController {
 		if (verwijderid != null) {
 			mandje.verwijder(verwijderid);
 		}
+		return REDIRECT_NA_DELETE;
+	}
+	
+	@PostMapping
+	String hanziebody() {
 		return REDIRECT_NA_DELETE;
 	}
 }

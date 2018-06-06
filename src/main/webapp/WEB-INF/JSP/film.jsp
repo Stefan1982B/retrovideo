@@ -2,17 +2,14 @@
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix='spring' uri="http://www.springframework.org/tags"%>
 <%@taglib prefix='form' uri='http://www.springframework.org/tags/form'%>
+<%@taglib uri='http://vdab.be/tags' prefix='vdab'%>
 <!doctype html>
 <html lang='nl'>
 <head>
-<title>film</title>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<link rel='icon' href='<c:url value="/images/retrovideo.ico"/>' type='image/x-icon'>
-<link rel='stylesheet' href='<c:url value="/css/retrovideo.css"/>'>
+<vdab:head title='film'/> 
 </head>
 <body>
-	<c:url value='/' var='url' />
-	<a href='${url}'>Reserveren</a>
+<vdab:reserveren/> 
 
 	<c:if test='${empty film}'>
 		<h1>film niet gevonden</h1>
@@ -22,7 +19,9 @@
 		<img src=<c:url value ="/images/${film.id}.jpg"/> alt="${film.titel}">
 		<dl>
 			<dt>Prijs</dt>
-			<dd><spring:eval expression='film.prijs'/></dd>
+			<dd>
+				<spring:eval expression='film.prijs' />
+			</dd>
 			<dt>Voorraad</dt>
 			<dd>${film.voorraad}</dd>
 			<dt>Gereserveerd</dt>
@@ -32,12 +31,18 @@
 		</dl>
 		<c:if test='${film.gereserveerd < film.voorraad}'>
 			<spring:url value='/film/{id}' var='url'>
-			   <spring:param name='id' value="${film.id}"/>  
-			    </spring:url> 
-			<form:form action='${url}' modelAttribute='mandjeForm' method='post'>
-				<input type='submit' value='Mandje'>
+				<spring:param name='id' value="${film.id}" />
+			</spring:url>
+			<form:form action='${url}' modelAttribute='mandjeForm' method='post' id='mandjeform'>
+				<input type='submit' value='Mandje' id='toevoegknop'>
 			</form:form>
 		</c:if>
 	</c:if>
+	
+		<script>
+		document.getElementById('mandjeform').onsubmit = function() {
+			document.getElementById('toevoegknop').disabled = true;
+		};
+	</script>
 </body>
 </html>

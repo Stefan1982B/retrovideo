@@ -2,18 +2,14 @@
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix='spring' uri="http://www.springframework.org/tags"%>
 <%@taglib prefix='form' uri='http://www.springframework.org/tags/form'%>
-
+<%@taglib uri='http://vdab.be/tags' prefix='vdab'%>
 <!doctype html>
 <html lang='nl'>
 <head>
-<title>retro video</title>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<link rel='icon' href='images/retrovideo.ico' type='image/x-icon'>
-<link rel='stylesheet' href='css/retrovideo.css'>
+<vdab:head title='retro video'/> 
 </head>
 <body>
-	<c:url value='/' var='url' />
-	<a href='${url}'>Reserveren</a>
+<vdab:reserveren/> 
 	<h1>Reserveren</h1>
 	<nav class="menu">
 		<ul>
