@@ -20,17 +20,19 @@
 	</ul>
 	</nav>
 	<h1>bevestigen</h1>
-	<p>${mandje.size()}film(s) voor ${klant.voornaam}
+	<p>${mandje.size()}film(s)voor${klant.voornaam}
 		${klant.familienaam}</p>
-
 	<spring:url value='/klant/{klantId}/bevestigd' var='url'>
-	  <spring:param name='klantId' value='${klant.id}'/> 
-	   </spring:url>
-	
-	<form:form action='${url}' modelAttribute='reservatie' method='post'>
-		<input type='submit' value='Bevestigen'>
+		<spring:param name='klantId' value='${klant.id}' />
+	</spring:url>
+	<form:form action='${url}' modelAttribute='reservatie' method='post' id='bevestigenform'>
+		<input type='submit' value='Bevestigen' id='toevoegknop'>
 	</form:form>
-<body>
 
+	<script>
+		document.getElementById('bevestigenform').onsubmit = function() {
+			document.getElementById('toevoegknop').disabled = true;
+		};
+	</script>
 </body>
 </html>

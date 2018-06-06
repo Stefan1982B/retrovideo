@@ -11,23 +11,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.vdab.retrovideo.entities.Film;
 import be.vdab.retrovideo.entities.Reservatie;
+import be.vdab.retrovideo.exceptions.FilmNietGevondenException;
 import be.vdab.retrovideo.services.FilmsService;
 import be.vdab.retrovideo.services.KlantenService;
 import be.vdab.retrovideo.services.ReservatiesService;
 
 @Controller
 @RequestMapping("klant")
-class BevestigenController {
+class RapportController {
 
 	private final Mandje mandje;
 	private final KlantenService klantenService;
 	private final ReservatiesService reservatiesService;
 	private final FilmsService filmsService;
 
-	BevestigenController(Mandje mandje, KlantenService klantenService, ReservatiesService reservatiesService,
+	RapportController(Mandje mandje, KlantenService klantenService, ReservatiesService reservatiesService,
 			FilmsService filmsService) {
 		this.mandje = mandje;
 		this.klantenService = klantenService;
@@ -49,34 +51,34 @@ class BevestigenController {
 	@GetMapping("{klantId}/bevestigd")
 	ModelAndView bevestigdview(@PathVariable int klantId) {
 		ModelAndView modelAndView = new ModelAndView(BEVESTIGD_VIEW);
-		List<String> filmTitels = new ArrayList<>();
-		for (int filmId : mandje.getFilmIds()) {
-			Reservatie reservatie = new Reservatie(klantId, filmId, LocalDateTime.now());
-			Optional<Film> film = filmsService.read(filmId);
-			if (film.get().getGereserveerd() >= film.get().getVoorraad()) {
-				filmTitels.add(film.get().getTitel());
-			}
-		}
-		modelAndView.addObject("filmTitels", filmTitels);
 		return modelAndView;
 	}
 
 	private final static String REDIRECT_URL_NA_BEVESTIGING = "redirect:/klant/{klantId}/bevestigd";
 
 	@PostMapping("{klantId}/bevestigd")
-	ModelAndView bevestigd(@PathVariable int klantId) {
+	ModelAndView bevestigd(@PathVariable int klantId, RedirectAttributes redirectAttributes) {
 		ModelAndView modelAndView = new ModelAndView(REDIRECT_URL_NA_BEVESTIGING);
-		List<String> filmTitels = new ArrayList<>();
+		String mislukt = "";
 		for (int filmId : mandje.getFilmIds()) {
 			Reservatie reservatie = new Reservatie(klantId, filmId, LocalDateTime.now());
 			Optional<Film> film = filmsService.read(filmId);
-			if (film.get().getGereserveerd() >= film.get().getVoorraad()) {
-				filmTitels.add(film.get().getTitel());
-			} else {
+			try {
 				reservatiesService.updateReservatiesEnFilms(reservatie, film.get());
+			} catch (FilmNietGevondenException ex) {
+				String filmNaam = film.get().getTitel();
+				mislukt = mislukt + "," + filmNaam;
 			}
 		}
-		modelAndView.addObject("filmTitels", filmTitels);
+		redirectAttributes.addAttribute("mislukteFilms", mislukt);
+		return modelAndView;
+	}
+
+	@GetMapping("{klantId}/bevestigd?mislukteFilms")
+	ModelAndView misluktview(@PathVariable String mislukt) {
+		ModelAndView modelAndView = new ModelAndView(BEVESTIGD_VIEW);
+		String[] gesplitstefilms = mislukt.split(",");
+		modelAndView.addObject("mislukteFilms", gesplitstefilms);
 		return modelAndView;
 	}
 }

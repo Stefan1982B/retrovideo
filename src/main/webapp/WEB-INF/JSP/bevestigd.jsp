@@ -18,16 +18,16 @@
 	</ul>
 	</nav>
 	<h1>Rapport</h1>
-	  <c:if test='${empty filmTitels}'>      
-	<p>De Reservatie is OK</p>
+	<c:if test='${empty param.mislukteFilms}'>
+		<p>De Reservatie is OK</p>
 	</c:if>
-  <c:if test='${not empty filmTitels}'>
-  <p>De Reservatie is niet OK, volgende titels zijn niet op voorraad:</p>
-	<ul>
-		<c:forEach items='${filmTitels}' var='filmTitel'>
-			<li><c:out value='${filmTitel}' /></li>
-		</c:forEach>
-	</ul>
+	<c:if test='${not empty param.mislukteFilms}'>
+		<p>Volgende reservaties zijn mislukt:</p>
+		<ul>
+			<c:forEach items='${param.mislukteFilms}' var='filmTitel'>
+				<li><c:out value='${filmTitel}' /></li>
+			</c:forEach>
+		</ul>
 	</c:if>
 
 </body>
