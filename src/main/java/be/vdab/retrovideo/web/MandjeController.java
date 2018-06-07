@@ -57,15 +57,15 @@ class MandjeController {
 	private final static String REDIRECT_NA_DELETE = "redirect:/mandje";
 
 	@PostMapping(params = "verwijderid")
-	String delete(int[] verwijderid) {
+	ModelAndView verwijderId(int[] verwijderid) {
 		if (verwijderid != null) {
-			mandje.verwijder(verwijderid);
+			mandje.verwijderFilmId(verwijderid);
 		}
-		return REDIRECT_NA_DELETE;
+		return new ModelAndView(REDIRECT_NA_DELETE);
 	}
 	
 	@PostMapping
-	String hanziebody() {
-		return REDIRECT_NA_DELETE;
+	ModelAndView VerwijderZonderId() {
+		return new ModelAndView(REDIRECT_NA_DELETE);
 	}
 }

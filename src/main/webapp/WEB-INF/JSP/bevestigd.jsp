@@ -15,7 +15,7 @@
 		<p>De Reservatie is OK</p>
 	</c:if>
 	<c:if test='${not empty param.mislukteFilms}'>
-		<p>Volgende reservaties zijn mislukt:</p>
+		<p>Volgende reservatie(s) zijn mislukt:</p>
 		<ul>
 			<c:forEach items='${param.mislukteFilms}' var='filmTitel'>
 				<li><c:out value='${filmTitel}' /></li>

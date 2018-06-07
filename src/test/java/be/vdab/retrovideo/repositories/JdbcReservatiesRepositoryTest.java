@@ -1,9 +1,7 @@
 package be.vdab.retrovideo.repositories;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
 
@@ -38,7 +36,6 @@ public class JdbcReservatiesRepositoryTest extends AbstractTransactionalJUnit4Sp
 		int aantalEntries = super.countRowsInTable(RESERVATIES);
 		Reservatie reservatie = new Reservatie(10, 20, LocalDateTime.now());
 		repository.create(reservatie);
-		assertNotEquals(0, reservatie.getReservatie());
 		assertEquals(aantalEntries + 1, this.countRowsInTable(RESERVATIES));
 		assertNotNull(reservatie.getReservatie());
 	}

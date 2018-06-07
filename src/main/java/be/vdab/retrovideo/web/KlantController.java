@@ -31,7 +31,7 @@ class KlantController {
 	}
 	
 	@GetMapping(params = "deelNaam")
-	ModelAndView deelNaam(@Valid DeelNaamForm deelNaamForm, BindingResult bindingResult) {
+	ModelAndView zoekOpDeelNaam(@Valid DeelNaamForm deelNaamForm, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView(KLANT_VIEW);
 		if(bindingResult.hasErrors()) {
 			return modelAndView;

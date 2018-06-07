@@ -22,7 +22,6 @@ class DefaultMandje implements Serializable, Mandje {
 	@Override
 	public void addFilmId(int filmId) {
 		filmIds.add(filmId);
-
 	}
 
 	@Override
@@ -31,14 +30,14 @@ class DefaultMandje implements Serializable, Mandje {
 	}
 
 	@Override
-	public void verwijder(int[] ids) {
+	public void verwijderFilmId(int[] ids) {
 		Arrays.stream(ids).forEach(id -> filmIds.remove(Integer.valueOf(id)));
-
 	}
 
 	@Override
 	public TotalePrijs berekenTotalePrijs(List<BigDecimal> filmPrijzen) {
-		TotalePrijs totaal = new TotalePrijs(filmPrijzen.stream().reduce((vorigeSom, getal) -> vorigeSom.add(getal)).orElse(BigDecimal.ZERO));
+		TotalePrijs totaal = new TotalePrijs(
+				filmPrijzen.stream().reduce((vorigeSom, getal) -> vorigeSom.add(getal)).orElse(BigDecimal.ZERO));
 		return totaal;
 	}
 

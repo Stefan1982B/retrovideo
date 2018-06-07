@@ -41,6 +41,8 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	
+	<form:errors/>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package be.vdab.retrovideo.repositories;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import org.springframework.test.context.junit4.SpringRunner;
 
 import be.vdab.retrovideo.entities.Film;
+import be.vdab.retrovideo.exceptions.FilmNietGevondenException;
 
 @RunWith(SpringRunner.class)
 @JdbcTest
@@ -33,7 +35,7 @@ public class JdbcFilmsRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 	private JdbcFilmsRepository repository;
 
 	@Test
-	public void test() {
+	public void findByGenre() {
 		List<Film> films = repository.findByGenre(1);
 		String vorigeFilm = "";
 		for (Film film : films) {
@@ -52,12 +54,23 @@ public class JdbcFilmsRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 		assertEquals("test", repository.read(idVanTestFilm()).get().getTitel());
 	}
 
-	
-	@Test   public void update() {   
-		int id = idVanTestFilm();  
+	@Test
+	public void readOnbestaandeFilm() {
+		assertFalse(repository.read(-1).isPresent());
+	}
+
+	@Test
+	public void update() {
+		int id = idVanTestFilm();
 		Film film = new Film(id, 1, "test", 10, 6, BigDecimal.TEN);
-		repository.update(film);     
+		repository.update(film);
 		assertEquals(7, repository.read(idVanTestFilm()).get().getGereserveerd());
 	}
-	
+
+	@Test(expected = FilmNietGevondenException.class)
+	public void updateOnbestaandeFilm() {
+		int id = idVanTestFilm();
+		Film film = new Film(id - 1, 2, "test", 10, 6, BigDecimal.TEN);
+		repository.update(film);
+	}
 }

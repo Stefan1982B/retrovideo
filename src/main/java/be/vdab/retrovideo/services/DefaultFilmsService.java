@@ -8,9 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.retrovideo.entities.Film;
-import be.vdab.retrovideo.entities.Genre;
 import be.vdab.retrovideo.repositories.FilmsRepository;
-import be.vdab.retrovideo.repositories.GenresRepository;
 
 @Service
 @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)

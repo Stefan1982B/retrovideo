@@ -25,38 +25,20 @@ public Klant(int id, String familienaam, String voornaam, String straatNummer, S
 public int getId() {
 	return id;
 }
-public void setId(int id) {
-	this.id = id;
-}
 public String getFamilienaam() {
 	return familienaam;
-}
-public void setFamilienaam(String familienaam) {
-	this.familienaam = familienaam;
 }
 public String getVoornaam() {
 	return voornaam;
 }
-public void setVoornaam(String voornaam) {
-	this.voornaam = voornaam;
-}
 public String getStraatNummer() {
 	return straatNummer;
-}
-public void setStraatNummer(String straatNummer) {
-	this.straatNummer = straatNummer;
 }
 public String getPostcode() {
 	return postcode;
 }
-public void setPostcode(String postcode) {
-	this.postcode = postcode;
-}
 public String getGemeente() {
 	return gemeente;
-}
-public void setGemeente(String gemeente) {
-	this.gemeente = gemeente;
 }
 
 

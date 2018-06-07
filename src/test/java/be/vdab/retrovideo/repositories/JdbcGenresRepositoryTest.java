@@ -27,7 +27,6 @@ import be.vdab.retrovideo.entities.Genre;
 
 public class JdbcGenresRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 
-	private static final String GENRES = "genres";
 
 	@Autowired
 	private JdbcGenresRepository repository;

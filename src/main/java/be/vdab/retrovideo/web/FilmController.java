@@ -27,7 +27,6 @@ class FilmController {
 	ModelAndView toonFilm(@PathVariable int id) {
 		ModelAndView modelAndView = new ModelAndView(FILM_VIEW);
 		filmsService.read(id).ifPresent(film -> modelAndView.addObject(film));
-		modelAndView.addObject(new MandjeForm());
 		return modelAndView;
 	}
 

@@ -52,4 +52,5 @@ public class JdbcKlantenRepositoryTest extends AbstractTransactionalJUnit4Spring
 	public void read() {
 		assertEquals("testvoornaam", repository.read(idVanTestKlant()).getVoornaam());
 	}
+
 }

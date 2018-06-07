@@ -7,8 +7,8 @@ import java.util.Set;
 import be.vdab.retrovideo.entities.TotalePrijs;
 
 interface Mandje {
-  void addFilmId(int filmid);  
+  void addFilmId(int filmId);  
   Set<Integer> getFilmIds(); 
-  void verwijder(int[] ids);
+  void verwijderFilmId(int[] ids);
   TotalePrijs berekenTotalePrijs(List<BigDecimal> filmPrijzen);
 }

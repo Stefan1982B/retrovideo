@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -14,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.when;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.retrovideo.entities.Film;
@@ -37,12 +35,12 @@ public class FilmControllerTest {
 	}
 
 	@Test   
-	public void ShowFilmWerktSamenMetFilmDotJsp() {    
+	public void ToonFilmWerktSamenMetFilmDotJsp() {    
 		ModelAndView modelAndView = controller.toonFilm(1);    
 		    assertEquals("film", modelAndView.getViewName());   } 
 	
 	@Test  
-	public void ShowFilmGeeftFilmsDoor() {   
+	public void ToonFilmGeeftFilmDoor() {   
 		ModelAndView modelAndView = controller.toonFilm(1);     
 		assertTrue(modelAndView.getModel().containsKey("film"));   }
 	
@@ -53,9 +51,9 @@ public class FilmControllerTest {
 		}   	 
 	
 	@Test   
-	public void onbestaandeGenre() {  
+	public void onbestaandeFilm() {  
 		ModelAndView modelAndView = controller.voegFilmToeAanMandje(-1);   
-		assertFalse(modelAndView.getModel().containsKey("genreFilms"));  
+		assertFalse(modelAndView.getModel().containsKey("filmId"));  
 		}
 
 }

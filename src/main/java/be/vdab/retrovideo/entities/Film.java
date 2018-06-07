@@ -31,38 +31,20 @@ public Film() {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public int getGenreId() {
 		return genreId;
-	}
-	public void setGenreId(int genreId) {
-		this.genreId = genreId;
 	}
 	public String getTitel() {
 		return titel;
 	}
-	public void setTitel(String titel) {
-		this.titel = titel;
-	}
 	public int getVoorraad() {
 		return voorraad;
-	}
-	public void setVoorraad(int voorraad) {
-		this.voorraad = voorraad;
 	}
 	public int getGereserveerd() {
 		return gereserveerd;
 	}
-	public void setGereserveerd(int gereserveerd) {
-		this.gereserveerd = gereserveerd;
-	}
 	public BigDecimal getPrijs() {
 		return prijs;
-	}
-	public void setPrijs(BigDecimal prijs) {
-		this.prijs = prijs;
 	}
 	
 	

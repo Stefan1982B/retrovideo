@@ -14,11 +14,9 @@ import be.vdab.retrovideo.entities.Reservatie;
 @Repository
 class JdbcReservatiesRepository implements ReservatiesRepository {
 
-	private final NamedParameterJdbcTemplate template;
 	private final SimpleJdbcInsert insert;
 
-	JdbcReservatiesRepository(NamedParameterJdbcTemplate template, DataSource dataSource) {
-		this.template = template;
+	JdbcReservatiesRepository(DataSource dataSource) {
 		this.insert = new SimpleJdbcInsert(dataSource);
 		insert.withTableName("reservaties");
 	}
