@@ -6,10 +6,10 @@
 <!doctype html>
 <html>
 <head>
-<vdab:head title='klanten'/> 
+<vdab:head title='klanten' />
 </head>
 <body>
-<vdab:menu/>
+	<vdab:menu />
 	<h1>Klanten</h1>
 	<c:url value='/klant' var='url' />
 	<form:form action='${url}' modelAttribute='deelNaamForm' method='get'
@@ -19,6 +19,7 @@
 		</form:label>
 		<form:input path='deelNaam' autofocus='autofocus' required='required' />
 		<input type='submit' value='Zoeken' id='zoekknop'>
+		<form:errors cssClass='fout' />
 	</form:form>
 	<c:if test='${not empty klanten}'>
 		<table>
@@ -41,8 +42,8 @@
 			</c:forEach>
 		</table>
 	</c:if>
-	
-	<form:errors/>
+
+
 
 </body>
 </html>
