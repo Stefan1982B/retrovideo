@@ -69,4 +69,16 @@ public class MandjeControllerTest {
 		ModelAndView modelAndView = controller.VerwijderZonderId();
 		assertEquals("redirect:/mandje", modelAndView.getViewName());
 	}
+	
+	@Test
+	public void ToonMandjeIgvDubbeleFilmWerktSamenMetMandjeDotJsp() {
+		ModelAndView modelAndView = controller.toonMandjeIgvDubbeleFilm(1);
+		assertEquals("mandje", modelAndView.getViewName());
+	}
+
+	@Test
+	public void ToonMandjeIgvDubbeleFilmGeeftFilmsDoor() {
+		ModelAndView modelAndView = controller.toonMandjeIgvDubbeleFilm(1);
+		assertTrue(modelAndView.getModel().containsKey("filmsInMandje"));
+	}
 }

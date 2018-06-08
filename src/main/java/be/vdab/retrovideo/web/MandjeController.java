@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +34,7 @@ class MandjeController {
 		}
 		return films;
 	}
-	
+
 	private List<BigDecimal> maakPrijzenVanFilmsIds(Set<Integer> filmIds) {
 		List<BigDecimal> prijzen = new ArrayList<>(filmIds.size());
 		for (int id : filmIds) {
@@ -47,10 +48,21 @@ class MandjeController {
 	@GetMapping()
 	ModelAndView toonMandje() {
 		List<Film> films = maakFilmsVanFilmsIds(mandje.getFilmIds());
-		List<BigDecimal>prijzen = maakPrijzenVanFilmsIds(mandje.getFilmIds());
+		List<BigDecimal> prijzen = maakPrijzenVanFilmsIds(mandje.getFilmIds());
 		ModelAndView modelAndView = new ModelAndView(MANDJE_VIEW);
 		modelAndView.addObject("filmsInMandje", films);
 		modelAndView.addObject("totalePrijs", mandje.berekenTotalePrijs(prijzen));
+		return modelAndView;
+	}
+
+	@GetMapping("?reedsInMandje")
+	ModelAndView toonMandjeIgvDubbeleFilm(@PathVariable int reedsInMandje) {
+		List<Film> films = maakFilmsVanFilmsIds(mandje.getFilmIds());
+		List<BigDecimal> prijzen = maakPrijzenVanFilmsIds(mandje.getFilmIds());
+		ModelAndView modelAndView = new ModelAndView(MANDJE_VIEW);
+		modelAndView.addObject("filmsInMandje", films);
+		modelAndView.addObject("totalePrijs", mandje.berekenTotalePrijs(prijzen));
+		modelAndView.addObject("reedsInMandje", reedsInMandje);
 		return modelAndView;
 	}
 
@@ -63,7 +75,7 @@ class MandjeController {
 		}
 		return new ModelAndView(REDIRECT_NA_DELETE);
 	}
-	
+
 	@PostMapping
 	ModelAndView VerwijderZonderId() {
 		return new ModelAndView(REDIRECT_NA_DELETE);

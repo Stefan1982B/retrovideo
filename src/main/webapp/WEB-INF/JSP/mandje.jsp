@@ -6,10 +6,10 @@
 <!doctype html>
 <html>
 <head>
-<vdab:head title='mandje'/> 
+<vdab:head title='mandje' />
 </head>
 <body>
-<vdab:menu/>
+	<vdab:menu />
 	<h1>Mandje</h1>
 	<c:if test='${empty filmsInMandje}'>
 		<h2>mandje is leeg</h2>
@@ -21,7 +21,8 @@
 				<tr>
 					<th>Film</th>
 					<th>Prijs</th>
-					<th><input type='submit' value='Verwijderen' id='verwijderknop'></th>
+					<th><input type='submit' value='Verwijderen'
+						id='verwijderknop'></th>
 				</tr>
 				<c:forEach items='${filmsInMandje}' var='film'>
 					<tr>
@@ -32,14 +33,18 @@
 					</tr>
 				</c:forEach>
 				<tr>
-				<td>Totaal:</td>
-				<td><spring:eval expression= 'totalePrijs.waarde' /></td>
+					<td>Totaal:</td>
+					<td><spring:eval expression='totalePrijs.waarde' /></td>
 				</tr>
 			</table>
-			</form>
+		</form>
 	</c:if>
-	
-		<script>
+
+	<c:if test='${not empty param.reedsInMandje}'>
+		<p>filmnr: ${param.reedsInMandje} is reeds aanwezig in het mandje</p>
+	</c:if>
+
+	<script>
 		document.getElementById('mandjeform').onsubmit = function() {
 			document.getElementById('verwijderknop').disabled = true;
 		};

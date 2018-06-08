@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.when;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.vdab.retrovideo.entities.Film;
 import be.vdab.retrovideo.services.FilmsService;
@@ -25,6 +26,8 @@ public class FilmControllerTest {
 	private Mandje dummyMandje;
 	@Mock
 	private FilmsService dummyFilmsService;
+	@Mock
+	private RedirectAttributes redirectAttributes;
 	
 	private FilmController controller;
 
@@ -46,13 +49,13 @@ public class FilmControllerTest {
 	
 	@Test  
 	public void VoegFilmToeAanMandjeWerktSamenMetMandjeDotJsp() { 
-		ModelAndView modelAndView = controller.voegFilmToeAanMandje(1);  
+		ModelAndView modelAndView = controller.voegFilmToeAanMandje(1, redirectAttributes);  
 		assertEquals("redirect:/mandje", modelAndView.getViewName());  
 		}   	 
 	
 	@Test   
 	public void onbestaandeFilm() {  
-		ModelAndView modelAndView = controller.voegFilmToeAanMandje(-1);   
+		ModelAndView modelAndView = controller.voegFilmToeAanMandje(-1, redirectAttributes);   
 		assertFalse(modelAndView.getModel().containsKey("filmId"));  
 		}
 

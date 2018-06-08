@@ -1,11 +1,14 @@
 package be.vdab.retrovideo.web;
 
+import java.util.Set;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import be.vdab.retrovideo.services.FilmsService;
 
@@ -30,12 +33,18 @@ class FilmController {
 		return modelAndView;
 	}
 
-
 	private static final String REDIRECT_NA_TOEVOEGEN = "redirect:/mandje";
 
 	@PostMapping("{id}")
-	ModelAndView voegFilmToeAanMandje(@PathVariable int id) {
-		mandje.addFilmId(id);
+	ModelAndView voegFilmToeAanMandje(@PathVariable int id, RedirectAttributes redirectAttributes) {
+		Set<Integer> filmIds = mandje.getFilmIds();
+		int eersteSize = filmIds.size();
+		filmIds.add(id);
+		int tweedeSize = filmIds.size();
+		int reedsInMandje = id;
+		if (eersteSize == tweedeSize) {
+			redirectAttributes.addAttribute("reedsInMandje", reedsInMandje);
+		}
 		return new ModelAndView(REDIRECT_NA_TOEVOEGEN);
 	}
 }
