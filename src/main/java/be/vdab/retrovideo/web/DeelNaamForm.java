@@ -1,9 +1,9 @@
 package be.vdab.retrovideo.web;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 class DeelNaamForm {
-	@NotBlank
+	@NotEmpty
 	private String deelNaam;
 
 	public String getDeelNaam() {
